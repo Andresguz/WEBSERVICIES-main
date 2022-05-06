@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Login : MonoBehaviour
 {
     [SerializeField]
-    private InputField correo=null;
+    private InputField correo;
     [SerializeField]
-    private InputField contra=null;
+    private InputField contra;
     public Text comprobacion;
     private string loginText;
     private string passwordText;
+    public Text skins;
+    public Text skins1;
+    public Text skins2;
+    public GameObject canvasBuy;
+    public GameObject canvasLogin;
     void Start()
     {
       //   StartCoroutine(PostRequestPlayers("http://localhost:8242/api/players/"));
      
-
+        canvasBuy.SetActive(false);
+        canvasLogin.SetActive(true);
     }
     public void boton()
     {
+       
         StartCoroutine(LoginUser("http://localhost:8242/api/Users1/"));
+        canvasBuy.SetActive(true);
+        canvasLogin.SetActive(false);
     }
-    public void readStringLogin(string s)
-    {
-        loginText = s;
-       // Debug.Log(loginText);
-    }
-    public void readStringPassword(string s)
-    {
-        passwordText = s;
-      //  Debug.Log(passwordText);
-    }
+    
     void Update()
     {
         
@@ -40,17 +41,9 @@ public class Login : MonoBehaviour
      IEnumerator LoginUser(string url)
     {
         WWWForm form = new WWWForm();
-
-       // form.AddField("FirstName", "Carlos");
-       // form.AddField("LastName", "perez");
-        //form.AddField("dateOfBirthday", "2022-04-06T09:43:00");
-        //form.AddField("middleName", "loep");
-
-        //form.AddField("Age", 22);
         form.AddField("Email", correo.text);
-        form.AddField("Password", contra.text);
-        //form.AddField("Mnk","huevos123");
-       
+        form.AddField("mnk", contra.text);
+
         using (UnityWebRequest webrequest = UnityWebRequest.Post(url, form))
         {
             yield return webrequest.SendWebRequest();
@@ -65,21 +58,12 @@ public class Login : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                     print(webrequest.downloadHandler.text);
                  
-                    User user=JsonUtility.FromJson<User>(webrequest.downloadHandler.text);
+                    Player player=JsonUtility.FromJson<Player>(webrequest.downloadHandler.text);
 
-                   print(user.Email);
-                    //if (user.Email == "andresguzguzman@gmail.com")
-                    //{
-                    //    Debug.Log("aaa");
-                    //}
+                    //  print(user.Email);
+               
+                    print(player.playerSkins[0].skin.name);
 
-                    // print(player.nickName);
-                    //if (correo.text == "papa")
-                    //{
-                    //    comprobacion.text = "exitoso";
-                    //}
-                  
-                  
                     break;
 
             };
