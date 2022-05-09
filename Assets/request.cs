@@ -40,9 +40,10 @@ public class request : MonoBehaviour
         StartCoroutine(GetRequestPlayers("http://localhost:8242/api/players"));
         sk1 = GameObject.Find("skinImagen").GetComponent<Image>();
      //   sk1.sprite = listaSkin[numS];
-        listaSkin[0] = Resources.Load<Sprite>("Sprites/i2");
-        listaSkin[1] = Resources.Load<Sprite>("Sprites/i3");
-        listaSkin[2] = Resources.Load<Sprite>("Sprites/i4");
+        listaSkin[0] = Resources.Load<Sprite>("Sprites/s1");
+        listaSkin[1] = Resources.Load<Sprite>("Sprites/s2");
+        listaSkin[2] = Resources.Load<Sprite>("Sprites/s3");
+        listaSkin[3] = Resources.Load<Sprite>("Sprites/i2");
     }
    
     public void next()
