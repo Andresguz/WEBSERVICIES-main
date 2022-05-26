@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                     
                     print("Se elimino");
-
+                    
                     break;
 
             };
